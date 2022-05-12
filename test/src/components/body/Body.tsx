@@ -10,17 +10,24 @@ interface IBodyComponentProps {
 }
 
 const Body: React.FC<IBodyComponentProps> = function (props) {
+    /* initializing component state */
     const [data, setData] = useState<Binary[][] | undefined>(undefined);
+
+    /* timeout ref needs to reset on new data */
     const timoutRef = useRef<NodeJS.Timeout | undefined>();
 
+    /* static data ( sorry for that ) */
     const testsList = useTestsList();
 
+    /* changing a current board data  */
     const runTest = useCallback((value: Binary[][]) => {
         timoutRef.current && clearTimeout(timoutRef.current);
         setData(value);
     }, [])
 
+    /* ticker */
     useEffect(() => {
+        /* next iterations only if we have a data */
         if (data) {
             timoutRef.current = setTimeout(() => {
                 setData(getNextMatrixState(data))

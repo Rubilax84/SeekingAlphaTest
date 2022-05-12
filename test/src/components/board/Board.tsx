@@ -8,6 +8,7 @@ interface IBoardProps {
 
 const Board: React.FC<IBoardProps> = (props) => {
 
+    /* getting a cell components list base on props data */
     const cells = useMemo(() => {
         const cellsList: JSX.Element[] = [];
 
