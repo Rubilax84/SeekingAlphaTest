@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './App.module.scss';
-import Body from './components/body';
+import MainPage from './components/body';
 
 function App() {
     return (
         <div className={styles.wrapper}>
-            <Body/>
+            <MainPage/>
         </div>
     );
 }

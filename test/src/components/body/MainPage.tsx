@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import Board from "../board";
-import styles from './Body.module.scss';
+import styles from './MainPage.module.scss';
 import {getNextMatrixState} from "../../utils/matrix";
 import {Binary} from "../../model";
 import {useTestsList} from "../../useTestsList";
@@ -9,7 +9,7 @@ interface IBodyComponentProps {
     refreshInterval?: number // ms
 }
 
-const Body: React.FC<IBodyComponentProps> = function (props) {
+const MainPage: React.FC<IBodyComponentProps> = function (props) {
     /* initializing component state */
     const [data, setData] = useState<Binary[][] | undefined>(undefined);
 
@@ -50,4 +50,4 @@ const Body: React.FC<IBodyComponentProps> = function (props) {
     )
 }
 
-export default Body;
+export default MainPage;
