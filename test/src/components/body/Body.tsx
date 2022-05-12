@@ -1,19 +1,19 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import Board from "../board";
 import styles from './Body.module.scss';
 import {getNextMatrixState} from "../../utils/matrix";
-import {test1, test2, test3, test4} from "../../mock/matrix";
 import {Binary} from "../../model";
+import {useTestsList} from "../../useTestsList";
 
 interface IBodyComponentProps {
     refreshInterval?: number // ms
 }
 
 const Body: React.FC<IBodyComponentProps> = function (props) {
-    const [data, setData] = useState(test2);
+    const [data, setData] = useState<Binary[][] | undefined>(undefined);
     const timoutRef = useRef<NodeJS.Timeout | undefined>();
 
-    const testsList = useMemo(() => [test1, test2, test3, test4], [])
+    const testsList = useTestsList();
 
     const runTest = useCallback((value: Binary[][]) => {
         timoutRef.current && clearTimeout(timoutRef.current);
@@ -21,10 +21,11 @@ const Body: React.FC<IBodyComponentProps> = function (props) {
     }, [])
 
     useEffect(() => {
-        timoutRef.current = setTimeout(() => {
-            setData(getNextMatrixState(data))
-        }, props.refreshInterval || 400);
-
+        if (data) {
+            timoutRef.current = setTimeout(() => {
+                setData(getNextMatrixState(data))
+            }, props.refreshInterval || 400);
+        }
     }, [data, props.refreshInterval])
 
     return (
@@ -37,7 +38,7 @@ const Body: React.FC<IBodyComponentProps> = function (props) {
             </div>
 
             {/* main board */}
-            <Board data={data}/>
+            {data && <Board data={data}/>}
         </div>
     )
 }
