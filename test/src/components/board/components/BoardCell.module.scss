@@ -1,0 +1,17 @@
+.cellWrapper {
+  width: 50px;
+  height: 50px;
+
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+.alive {
+  background-color: black;
+}
+
+.dead {
+  background-color: white;
+}
