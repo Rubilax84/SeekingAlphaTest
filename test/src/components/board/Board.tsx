@@ -25,7 +25,9 @@ const Board: React.FC<IBoardProps> = (props) => {
         return cellsList;
     }, [props.data])
 
-    return <div className={styles.boardWrapper}>
+    const maxWrapperWidth = useMemo(() => props.data.length * (50 + 2), [props.data])
+
+    return <div className={styles.boardWrapper} style={{width: `${maxWrapperWidth}px`}}>
         {cells}
     </div>
 }
